@@ -10,17 +10,19 @@ const columns = Math.floor(canvas.width / fontSize);
 const drops = Array(columns).fill(1);
 
 function drawMatrix() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  // Sfondo più persistente
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.font = `${fontSize}px serif`;
 
   for (let i = 0; i < drops.length; i++) {
     const text = hearts[Math.floor(Math.random() * hearts.length)];
-    ctx.fillStyle = 'rgba(255, 105, 180, 0.4)';
+    // Cuori molto più sbiaditi
+    ctx.fillStyle = 'rgba(255, 105, 180, 0.2)';
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
+    if (drops[i] * fontSize > canvas.height || Math.random() > 0.985) {
       drops[i] = 0;
     }
 
@@ -28,7 +30,7 @@ function drawMatrix() {
   }
 }
 
-setInterval(drawMatrix, 50);
+setInterval(drawMatrix, 100);
 
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
