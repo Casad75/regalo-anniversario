@@ -32,10 +32,24 @@ function drawMatrix() {
 
 setInterval(drawMatrix, 100);
 
-window.addEventListener('resize', () => {
+function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-});
+
+  // Ricalcola colonne e drops
+  const newColumns = Math.floor(canvas.width / fontSize);
+  drops.length = newColumns;
+  for (let i = 0; i < newColumns; i++) {
+    drops[i] = 1;
+  }
+}
+
+// Chiamalo inizialmente
+resizeCanvas();
+
+// E ogni volta che la finestra cambia
+window.addEventListener('resize', resizeCanvas);
+
 
 // --- SCRITTE PRINCIPALI + PULSANTE CUORE ---
 const words = ["Buon", "Anniversario", "Amore"];
