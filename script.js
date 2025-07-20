@@ -6,8 +6,8 @@ canvas.height = window.innerHeight;
 
 const hearts = ['💖', "💜", "💙", "🧡", '💘', '💝', '💗', '💓', '💕'];
 const fontSize = 20;
-const columns = Math.floor(canvas.width / fontSize);
-const drops = Array(columns).fill(1);
+let columns = Math.floor(canvas.width / fontSize);
+let drops = Array(columns).fill(1);
 
 function drawMatrix() {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
@@ -30,10 +30,19 @@ function drawMatrix() {
 
 setInterval(drawMatrix, 50);
 
-window.addEventListener('resize', () => {
+function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-});
+  columns = Math.floor(canvas.width / fontSize);
+  drops.length = 0;
+  for (let i = 0; i < columns; i++) {
+    drops[i] = 1;
+  }
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); // chiamala anche all'inizio per sicurezza
+
 
 // --- SCRITTE PRINCIPALI + PULSANTE CUORE ---
 const words = ["Buon", "Anniversario", "Amore"];
