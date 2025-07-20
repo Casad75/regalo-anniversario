@@ -10,19 +10,17 @@ const columns = Math.floor(canvas.width / fontSize);
 const drops = Array(columns).fill(1);
 
 function drawMatrix() {
-  // Sfondo più persistente
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.font = `${fontSize}px serif`;
 
   for (let i = 0; i < drops.length; i++) {
     const text = hearts[Math.floor(Math.random() * hearts.length)];
-    // Cuori molto più sbiaditi
-    ctx.fillStyle = 'rgba(255, 105, 180, 0.2)';
+    ctx.fillStyle = 'rgba(255, 105, 180, 0.4)';
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    if (drops[i] * fontSize > canvas.height || Math.random() > 0.985) {
+    if (drops[i] * fontSize > canvas.height || Math.random() > 0.975) {
       drops[i] = 0;
     }
 
@@ -30,26 +28,12 @@ function drawMatrix() {
   }
 }
 
-setInterval(drawMatrix, 100);
+setInterval(drawMatrix, 50);
 
-function resizeCanvas() {
+window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-
-  // Ricalcola colonne e drops
-  const newColumns = Math.floor(canvas.width / fontSize);
-  drops.length = newColumns;
-  for (let i = 0; i < newColumns; i++) {
-    drops[i] = 1;
-  }
-}
-
-// Chiamalo inizialmente
-resizeCanvas();
-
-// E ogni volta che la finestra cambia
-window.addEventListener('resize', resizeCanvas);
-
+});
 
 // --- SCRITTE PRINCIPALI + PULSANTE CUORE ---
 const words = ["Buon", "Anniversario", "Amore"];
