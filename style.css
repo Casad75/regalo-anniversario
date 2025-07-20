@@ -27,6 +27,19 @@ canvas#matrix {
   font-size: 8vw;
   text-align: center;
   z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: pink;
+  font-size: 8vw;
+  text-align: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.7); /* ✅ Sfondo nero trasparente */
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  line-height: 1.2;
+  max-width: 90%;
 }
 
 .fade {
