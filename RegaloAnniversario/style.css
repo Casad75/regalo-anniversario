@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  font-family: 'Great Vibes', cursive;
+}
+
+canvas#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.text-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: pink;
+  font-size: 8vw;
+  text-align: center;
+  z-index: 2;
+}
+
+.fade {
+  animation: softZoom 4s ease forwards;
+}
+
+@keyframes softZoom {
+  0% { transform: scale(0.2); opacity: 0; }
+  30% { transform: scale(1.2); opacity: 1; }
+  70% { transform: scale(1); opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#heartContainer {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  max-width: 300px;
+  z-index: 2;
+  animation: pulse 2s infinite;
+}
+
+.heart-svg {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.heart-svg text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 12px;
+  fill: white;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+/* Effetto pulsazione */
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Contenitore della mappa (video finale) */
+#mapContainer {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background: transparent;
+  width: auto;
+  height: auto;
+}
+
+#mapVideo {
+  width: 60vw;
+  max-width: 800px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(255, 105, 180, 0.5);
+}
