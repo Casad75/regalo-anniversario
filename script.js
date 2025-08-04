@@ -1,27 +1,3 @@
-// --- AVVIO MUSICA DOPO PRIMA INTERAZIONE ---
-const bgMusic = document.getElementById('bgMusic');
-let musicStarted = false;
-
-function tryStartMusic() {
-  if (!musicStarted && bgMusic) {
-    bgMusic.volume = 0.5;
-    bgMusic.play().then(() => {
-      musicStarted = true;
-    }).catch((e) => {
-      console.warn('Audio non avviato:', e);
-    });
-
-    document.removeEventListener('mousemove', tryStartMusic);
-    document.removeEventListener('keydown', tryStartMusic);
-    document.removeEventListener('touchstart', tryStartMusic);
-  }
-}
-
-document.addEventListener('mousemove', tryStartMusic);
-document.addEventListener('keydown', tryStartMusic);
-document.addEventListener('touchstart', tryStartMusic);
-
-
 // --- ANIMAZIONE MATRIX CUORI ---
 const canvas = document.getElementById('matrix');
 const ctx = canvas.getContext('2d');
@@ -106,17 +82,18 @@ function createHeartButton() {
   svg.appendChild(path);
 
   // Testo "Premimi"
-  const text = document.createElementNS(svgNS, 'text');
-  text.setAttribute('x', '50');
-  text.setAttribute('y', '45');
-  text.setAttribute('fill', 'white');
-  text.setAttribute('font-family', "'Great Vibes', cursive");
-  text.setAttribute('font-size', '16');
-  text.setAttribute('text-anchor', 'middle');
-  text.setAttribute('dominant-baseline', 'middle');
-  text.style.userSelect = 'none';
-  text.textContent = 'Premimi';
-  svg.appendChild(text);
+const text = document.createElementNS(svgNS, 'text');
+text.setAttribute('x', '50');
+// Abbassiamo il valore Y per alzare il testo
+text.setAttribute('y', '45');  // <-- da 55 a 50
+text.setAttribute('fill', 'white');
+text.setAttribute('font-family', "'Great Vibes', cursive");
+text.setAttribute('font-size', '16');
+text.setAttribute('text-anchor', 'middle');
+text.setAttribute('dominant-baseline', 'middle');
+text.style.userSelect = 'none';
+text.textContent = 'Premimi';
+svg.appendChild(text);
 
   revealBtn.appendChild(svg);
 
@@ -144,13 +121,6 @@ function showHeartButton() {
 setTimeout(() => showWord(0), 2000); // Avvia animazione scritte dopo 2 secondi
 
 revealBtn.addEventListener('click', () => {
-  // 🔇 Ferma la musica
-  if (bgMusic && !bgMusic.paused) {
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-  }
-
-  // 🎥 Mostra video e nasconde pulsante
   revealBtn.style.display = 'none';
   mapContainer.style.display = 'block';
   mapVideo.play();
