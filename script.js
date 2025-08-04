@@ -121,14 +121,28 @@ function showHeartButton() {
 setTimeout(() => showWord(0), 2000); // Avvia animazione scritte dopo 2 secondi
 
 revealBtn.addEventListener('click', () => {
+  const bgMusic = document.getElementById('bgMusic');
+
+  // ✅ Sblocca autoplay al primo click
+  if (bgMusic) {
+    bgMusic.muted = false;  // Rimuove il muto
+    bgMusic.volume = 0.5;   // Volume medio
+    bgMusic.play().catch(err => {
+      console.warn('Errore nel tentativo di avviare la musica:', err);
+    });
+  }
+
+  // ⛔ Nasconde il pulsante e mostra il video
   revealBtn.style.display = 'none';
   mapContainer.style.display = 'block';
   mapVideo.play();
 
-  const bgMusic = document.getElementById('bgMusic');
+  // 🔇 Ferma la musica subito dopo
   if (bgMusic) {
-    bgMusic.pause();
-    bgMusic.currentTime = 0; // se vuoi che riparta da capo in caso venga riattivata
+    setTimeout(() => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+    }, 1000); // Lascia suonare per 1 secondo prima di stoppare
   }
 });
 
