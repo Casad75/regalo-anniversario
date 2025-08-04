@@ -124,4 +124,12 @@ revealBtn.addEventListener('click', () => {
   revealBtn.style.display = 'none';
   mapContainer.style.display = 'block';
   mapVideo.play();
+
+  const bgMusic = document.getElementById('bgMusic');
+  if (bgMusic) {
+    bgMusic.pause();
+    bgMusic.currentTime = 0; // se vuoi che riparta da capo in caso venga riattivata
+  }
 });
+
+
